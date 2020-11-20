@@ -20,6 +20,8 @@ foo
 
 %install
 # make necessary directories
+ls -lah
+ls -lah %{buildroot}%{APPDATADIR}
 mkdir -p \
     %{buildroot}%{APPDATADIR} \
     %{buildroot}%{_bindir} 
