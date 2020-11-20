@@ -21,6 +21,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          spec_file: example/.rpm/hello-typsecript.spec
+          spec_file: example/.rpm/hello-typescript.spec
           _topdir: example/.rpm/build
           # source_archive: example/.rpm/build/SOURCES/hello-typescript.tar.gz
