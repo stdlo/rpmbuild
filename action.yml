@@ -6,6 +6,9 @@ inputs:
     description: 'path to spec file'
     required: true
     default: '*.spec'
+  _topdir:
+    description: 'rpm top dir'
+    required: false
 
 runs:
   using: 'docker'
