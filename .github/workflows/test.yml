@@ -1,24 +1,35 @@
 name: 'build-test'
-on: # rebuild any PRs and main branch changes
+on:
   pull_request:
   push:
     branches:
       - main
-      - 'releases/*'
 
 jobs:
-  build: # make sure build/ci work properly
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          npm install
-      - run: |
-          npm run all
-  test: # make sure the action works on a clean machine without building
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+
+      # Test action
+      - name: Build RPM
+        uses: ./
+        id: rpm_build
         with:
-          milliseconds: 1000
+          spec_file: example/hello-typescript.spec
+          src_archive: example/artifacts/hello-typescript.tar.gz
+
+      # Upload artifact for inspection
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.rpm_build.outputs.rpm_name }}
+          path: ${{ steps.rpm_build.outputs.rpm_path }}
