@@ -1,11 +1,15 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'rpmbuild'
+description: 'Build RPM packages'
+author: 'loganbickmore'
 inputs:
-  milliseconds: # change this
+  spec_file:
+    description: 'path to spec file'
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    default: '*.spec'
+  src_archive:
+    description: 'path to source archive file'
+    required: true
+
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: 'docker'
+  image: 'Dockerfile'

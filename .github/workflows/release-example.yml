@@ -1,0 +1,68 @@
+name: 'build-release'
+on:
+  pull_request:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Create RPM Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      #######################################
+      # Test before building
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+
+      #######################################
+      # Set TAG env for our rpm specfile
+      # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
+      - run: echo "TAG=${GITHUB_REF#refs/*/v}" >> $GITHUB_ENV
+
+      #######################################
+      # Build RPM
+      - name: Build RPM
+        uses: ./
+        id: rpm_build
+        with:
+          spec_file: example/hello-typescript.spec
+          src_archive: example/artifacts/hello-typescript.tar.gz
+
+      #######################################
+      # Optional Upload Artifact
+      # https://github.com/actions/upload-artifact
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: ${{ steps.rpm_build.outputs.rpm_name }}
+      #     path: ${{ steps.rpm_build.outputs.rpm_path }}
+
+      #######################################
+      # Create Release
+      # https://github.com/actions/create-release
+      - uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+
+      #######################################
+      # Upload Release Asset
+      # https://github.com/actions/upload-release-asset
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.rpm_build.outputs.rpm_path }}
+          asset_name: ${{ steps.rpm_build.outputs.rpm_name }}
+          asset_content_type: ${{ steps.rpm_build.outputs.rpm_content_type }}
