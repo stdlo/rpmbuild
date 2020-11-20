@@ -23,3 +23,4 @@ jobs:
         with:
           spec_file: example/.rpm/hello-typsecript.spec
           _topdir: example/.rpm/build
+          # source_archive: example/.rpm/build/SOURCES/hello-typescript.tar.gz
