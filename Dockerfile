@@ -13,5 +13,6 @@ RUN tar --strip-components 1 -xvf node-v* -C /usr/local
 
 RUN npm install --production
 
-ENTRYPOINT ["node", "/lib/main.js"]
+# ENTRYPOINT ["node", "/lib/main.js"]
+ENTRYPOINT ["ls"]
 
