@@ -1,9 +1,9 @@
 import * as core from '@actions/core'
+import { exec } from '@actions/exec'
 import * as github from '@actions/github'
-import {exec} from '@actions/exec'
-import * as io from '@actions/io'
-import * as cp from 'child_process'
-import * as fs from 'fs'
+// import * as io from '@actions/io'
+// import * as cp from 'child_process'
+// import * as fs from 'fs'
 
 // working directory is /github/workspace
 // home is /github/home
