@@ -24,11 +24,13 @@ async function run(): Promise<void> {
 
     // Log some things
     console.log('###########################')
+    console.log('## Eval existing topdir: rpm --eval "%{_topdir}"')
+    await exec('rpm --eval "%{_topdir}"')
     console.log(`## ls _topdir(${topdir})`)
     await exec(`ls ${topdir}`)
     console.log(`## ls rpmbuild home(/github/home/rpmbuild)`)
     await exec('ls /github/home')
-    await exec('ls /github/home/rpmbuild')
+    // await exec('ls /github/home/rpmbuild') // this directory doesnt exist, default is likly /root/rpmbuild
     console.log('###########################')
     // END
 
