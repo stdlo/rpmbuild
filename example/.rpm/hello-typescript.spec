@@ -21,9 +21,8 @@ foo
 %install
 # make necessary directories
 pwd
-ls -lah ..
 ls -lah
-ls -lah %{buildroot}%{APPDATADIR}
+
 mkdir -p \
     %{buildroot}%{APPDATADIR} \
     %{buildroot}%{_bindir} 
