@@ -16,6 +16,8 @@ BuildArch:      noarch
 %description
 foo
 
+%prep
+
 %setup -q -n %{NAME}
 
 %install
