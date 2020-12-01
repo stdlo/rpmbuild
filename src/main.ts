@@ -12,15 +12,15 @@ async function run(): Promise<void> {
   try {
     // Get Context
     console.log('## getting context')
-    const {owner, repo} = github.context.repo
+    const { owner, repo } = github.context.repo
     const ref = github.context.ref
-    console.log({owner, repo, ref})
+    console.log({ owner, repo, ref })
 
     // Get Inputs
     console.log('## getting inputs')
     const specFile = core.getInput('spec_file')
     const topdir = core.getInput('_topdir')
-    console.log({specFile, topdir})
+    console.log({ specFile, topdir })
 
     // Log some things
     console.log('###########################')
