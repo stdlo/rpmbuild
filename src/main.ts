@@ -34,9 +34,6 @@ async function run(): Promise<void> {
     console.log('###########################')
     // END
 
-    console.log('## running rpmdev-setuptree')
-    await exec('rpmdev-setuptree')
-
     const COMMAND = `rpmbuild -bb ${specFile} --define "_topdir /github/workspace/${topdir}"`
     console.log(`## running ${COMMAND}`)
     await exec(COMMAND)
