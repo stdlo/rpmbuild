@@ -30,6 +30,5 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: RPM binary
-          # path: ${{ steps.rpm.outputs.rpm_path }}
+          name: ${{ steps.rpm.outputs.rpm_name }}
           path: example/.rpm/build/RPMS/**/*.rpm
