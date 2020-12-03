@@ -20,13 +20,8 @@ async function run(): Promise<void> {
     const topdir = core.getInput('_topdir')
 
     // Build rpm package
-    await exec('rpmbuild', [
-      '-bb',
-      specFile,
-      '--define',
-      `"_topdir ${topdir}"`
-      // `"_topdir ${WORKSPACE}/${topdir}"` /* NOTE: ${WORKSPACE} might be unnecessary due to it being the cwd */
-    ])
+    await exec('rpmbuild', ['-bb', specFile, `--define="_topdir ${topdir}"`])
+    // `"_topdir ${WORKSPACE}/${topdir}"` /* NOTE: ${WORKSPACE} might be unnecessary due to it being the cwd */
 
     // Verify rpm file exists
     await exec(`ls ${topdir}/RPMS`)
