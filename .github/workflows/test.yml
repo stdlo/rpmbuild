@@ -32,3 +32,10 @@ jobs:
         with:
           name: ${{ steps.rpm.outputs.rpm_name }}
           path: example/.rpm/build/RPMS/**/*.rpm
+
+      ##########################################################################
+      ##########################################################################
+      # NOTE: To move the rpm file to a release follow
+      # https://github.com/naveenrajm7/rpmbuild#the-above-release-uploads-srpm-like-
+      ##########################################################################
+      ##########################################################################
