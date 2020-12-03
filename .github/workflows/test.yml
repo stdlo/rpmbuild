@@ -20,8 +20,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: ./
+        id: rpm
         with:
           spec_file: example/.rpm/hello-typescript.spec
           _topdir: example/.rpm/build
           # source_archive: example/.rpm/build/SOURCES/hello-typescript.tar.gz
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: RPM binary
+          path: ${{ steps.rpm.outputs.rpm_path }}
