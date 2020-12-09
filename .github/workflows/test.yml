@@ -28,7 +28,7 @@ jobs:
           _topdir: example/.rpm/build
 
       # Echo Outputs
-      - run: echo ${{ toJSON(steps.rpm_build.outputs }}
+      - run: echo ${{ toJSON(steps.rpm_build.outputs) }}
 
       # Upload artifact for inspection
       - uses: actions/upload-artifact@v2
