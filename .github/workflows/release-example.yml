@@ -34,7 +34,8 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.rpm_build.outputs.rpm_name }}
-          path: example/.rpm/build/RPMS/**/*.rpm
+          path: example/.rpm/build/RPMS/noarch/${{ steps.rpm_build.outputs.rpm_name }}
+          #path: example/.rpm/build/RPMS/**/*.rpm
 
       #######################################
       # Create Release
