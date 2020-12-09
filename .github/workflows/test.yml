@@ -24,9 +24,8 @@ jobs:
       - uses: ./
         id: rpm_build
         with:
-          spec_file: example/.rpm/hello-typescript.spec
-          src_archive: example/.rpm/build/SOURCES/hello-typescript.tar.gz
-          # _topdir: example/.rpm/build
+          spec_file: example/hello-typescript.spec
+          src_archive: example/artifacts/hello-typescript.tar.gz
 
       # Upload artifact for inspection
       - uses: actions/upload-artifact@v2

@@ -28,16 +28,15 @@ jobs:
         env:
           TAG: ${{ github.ref }}
         with:
-          spec_file: example/.rpm/hello-typescript.spec
-          _topdir: example/.rpm/build
+          spec_file: example/hello-typescript.spec
+          src_archive: example/artifacts/hello-typescript.tar.gz
 
       #######################################
       # Upload Artifact
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.rpm_build.outputs.rpm_name }}
-          path: example/.rpm/build/RPMS/noarch/${{ steps.rpm_build.outputs.rpm_name }}
-          #path: example/.rpm/build/RPMS/**/*.rpm
+          path: ${{ steps.rpm_build.outputs.rpm_path }}
 
       #######################################
       # Create Release
