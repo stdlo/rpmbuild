@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
       #######################################
       # Set TAG env for our rpm specfile
       # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
-      - run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - run: echo "TAG=${GITHUB_REF#refs/*/v}" >> $GITHUB_ENV
 
       #######################################
       # Build RPM
@@ -36,6 +36,7 @@ jobs:
 
       #######################################
       # Upload Artifact
+      # https://github.com/actions/upload-artifact
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.rpm_build.outputs.rpm_name }}
@@ -43,6 +44,7 @@ jobs:
 
       #######################################
       # Create Release
+      # https://github.com/actions/create-release
       - uses: actions/create-release@v1
         id: create_release
         env:
@@ -55,6 +57,7 @@ jobs:
 
       #######################################
       # Upload Release Asset
+      # https://github.com/actions/upload-release-asset
       - uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

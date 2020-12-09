@@ -21,7 +21,8 @@ jobs:
       - uses: actions/checkout@v2
 
       # Test action
-      - uses: ./
+      - name: Build RPM
+        uses: ./
         id: rpm_build
         with:
           spec_file: example/hello-typescript.spec
