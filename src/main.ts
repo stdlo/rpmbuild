@@ -5,10 +5,10 @@ async function run(): Promise<void> {
   try {
     // Get inputs
     const specFile = core.getInput('spec_file')
-    const topdir = `/github/workspace/${core.getInput('_topdir')}`
+    const topdir = core.getInput('_topdir')
 
     // Build rpm package
-    await exec(`rpmbuild -bb ${specFile} --define="_topdir ${topdir}"`)
+    await exec(`rpmbuild -bb ${specFile} --define="_topdir /github/workspace/${topdir}"`)
 
     // Set outputs
     let rpm_path = ''
