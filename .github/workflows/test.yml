@@ -28,7 +28,7 @@ jobs:
           _topdir: example/.rpm/build
 
       # Echo Outputs
-      - run: echo '${{ toJSON(steps.rpm_build.outputs)' }}
+      - run: echo '${{ toJSON(steps.rpm_build.outputs) }}'
       - run: pwd
       - run: ls $(dirname ${{ steps.rpm_build.outputs.rpm_path }})
 
