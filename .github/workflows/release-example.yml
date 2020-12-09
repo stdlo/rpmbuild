@@ -47,7 +47,7 @@ jobs:
           release_name: Actions Release ${{ github.ref }}
           body: |
             Title:
-            - ${{ join(github.event.commits[message]) }}
+            - ${{ join(github.event.commits.\*.message) }}
           draft: false
           prerelease: false
 
