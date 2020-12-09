@@ -21,12 +21,15 @@ jobs:
       - run: npm run build
 
       #######################################
+      # Set TAG env for our rpm specfile
+      # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
+      - run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      #######################################
       # Build RPM
       - name: Build RPM
         uses: ./
         id: rpm_build
-        env:
-          TAG: ${{ github.ref }}
         with:
           spec_file: example/hello-typescript.spec
           src_archive: example/artifacts/hello-typescript.tar.gz
