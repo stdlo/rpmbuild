@@ -15,7 +15,26 @@ jobs:
       - run: npm run test
       - run: npm run build
 
-  test:
+  test-without-topdir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Test action
+      - uses: ./
+        id: rpm_build
+        with:
+          spec_file: example/.rpm/hello-typescript.spec
+          # _topdir: example/.rpm/build
+          src_archive: example/.rpm/build/SOURCES/hello-typescript.tar.gz
+
+      # Upload artifact for inspection
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.rpm_build.outputs.rpm_name }}
+          path: ${{ steps.rpm_build.outputs.rpm_path }}
+
+test-with-topdir:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

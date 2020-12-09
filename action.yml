@@ -8,7 +8,12 @@ inputs:
     default: '*.spec'
   _topdir:
     description: 'rpm top dir'
+    default: 'rpmbuild'
     required: false
+  src_archive:
+    description: 'path to source archive file'
+    required: true
+  
 
 runs:
   using: 'docker'
