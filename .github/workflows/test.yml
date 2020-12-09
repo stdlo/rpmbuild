@@ -27,9 +27,13 @@ jobs:
           spec_file: example/.rpm/hello-typescript.spec
           _topdir: example/.rpm/build
 
+      # Echo Outputs
+      - run: echo ${{ toJSON(steps.rpm_build.outputs }}
+
       # Upload artifact for inspection
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.rpm_build.outputs.rpm_name }}
-          path: example/.rpm/build/RPMS/noarch/${{ steps.rpm_build.outputs.rpm_name }}
+          path: ${{ steps.rpm_build.outputs.rpm_path }}
+          # path: example/.rpm/build/RPMS/noarch/${{ steps.rpm_build.outputs.rpm_name }}
           # path: example/.rpm/build/RPMS/**/*.rpm

@@ -25,6 +25,8 @@ jobs:
       - name: Build RPM
         uses: ./
         id: rpm_build
+        env:
+          TAG: ${{ github.ref }}
         with:
           spec_file: example/.rpm/hello-typescript.spec
           _topdir: example/.rpm/build
